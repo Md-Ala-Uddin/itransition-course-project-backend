@@ -1,98 +1,109 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+### Project Requirement
+JavaScript: JavaScript or TypeScript (you choose), React, Express
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+There are no limitations in the area of architecture or used services. For example, you are not required to have a separate full-featured back or vise verse, have a lot of things on the client, you may approach this whatever way you want. 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+It's recommended to use the simplest and the safest approach to the persistence, namely relational databse, e.g. PostgreSQL, MySQL, SQL Server, anything, but again you don't have to. Also, you may replace Bootstrap with any CSS framework and/or UI library you like. 
 
-## Description
+React is required for JavaScript group; it can be used by .NET and PHP group as well.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**You have to implement a Web application for customisable forms (quizzes, tests, questionnaires, polls, etc.). Something similar to Google Forms. Users define "templates" (the set of questions, their names and descriptions, etc.), and other users fill out "forms" (their specific answers) using these templates (e.g., enter or select values in the fields).**
 
-## Project setup
+***E.g., I create a template with one integer-valued question "How many apples do you eat per day?" Users fill out corresponding forms, and I can analyse the answers.***
 
-```bash
-$ pnpm install
-```
+***If your app will have N+1 buttons (view/edit/delete in each item), your result will be graded -20%. Use toolbars, or animated "appearing" context actions, etc.***
 
-## Compile and run the project
+**Non-authenticated users cannot create templates, leave comments and likes, or fill out the forms. But they can use search and view templates in read-only mode.**
 
-```bash
-# development
-$ pnpm run start
+**Admin-page allow user management—view; block; unblock; delete; add to admins; remove from admins. ADMIN IS ABLE TO REMOVE ADMIN ACCESS FROM ITSELF; it’s important.**
 
-# watch mode
-$ pnpm run start:dev
+**Admin sees all pages as their author (for example, admin can open a template of another user and add a question to it or open a form for the user and edit an answer; so, admin is virtually the owner of every template and every form).**
 
-# production mode
-$ pnpm run start:prod
-```
+**Filled-out form (answers) can be seen by the author who fill out this form as well as the creator of the responding template and admins. "Public" templates are accessible for viewing for everyone.**
 
-## Run tests
+**Only the admin or creator of the template can manage it (add/delete/edit questions).**
 
-```bash
-# unit tests
-$ pnpm run test
+**Only the admin or creator of the form can manage it (delete it or edit answers).**
 
-# e2e tests
-$ pnpm run test:e2e
+**Users can register and authenticate via site forms.**
 
-# test coverage
-$ pnpm run test:cov
-```
+**Every page (in the top header) provides access to the full-text search. Search results are always templates (e.g., if text is found in the question description or template comments, the search result links to the template itself, not to the question or comment).**
 
-## Deployment
+**Every user has its own personal page where they can manage the sortable table of templates (create new, delete, or edit) and the sortable table of the filled forms (probably on two separate tabs).**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+***Each template in the table is a link to the template page that contains several tabs:***
+1. general settings like title, description, etc. (see below) as well as access settings (all authenticated users for "public" templates or specified user only for "restricted"),
+2. editable set of questions,
+3. "results", i.e. all filled-out forms based on the given template (with the links to the forms, of course),
+4. aggregation of the results/answers (e.g., average value for a numeric field, most often answer for a string field, etc.).
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+**The template author can click any form in the list on the template page and open the form filled by another user in read-only mode.**
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
+**When the template is shown to the other user, it can be filled out (stored as a "form") if that user is authenticated, and access settings allow that user to fill out the form.**
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+***Settings of the template are the following:***
+1. title,
+2. description (with markdown formatting support),
+3. topic (one value from the predefined list, for example, "Education," "Quiz," and, of course, "Other"—new values to this list are added through the database; there is no need for the UI),
+4. optional image/illustration (uploaded by the users into the cloud),
+5. tags (the user can enter several tags; it’s necessary to support autocompletion—when the user starts text entering, you have to display a dropdown with tags starting with the entered letter already stored in the database).
 
-## Resources
+**Every template can be marked as "public" (can be filled by any authenticated user), or the user selects the set of users registered on the site. The control for the user selection should provide autocompletion for names and for e-mails. Added users can be removed. Provide some sorting of the selected user (user-switchable between name and e-mail).**
 
-Check out a few resources that may come in handy when working with NestJS:
+**Of course, the template allows to specify custom questions ("fields"). There are also fixed fields, that are invisible on the template, but are shown on every form: user (filled automatically) and date (filled automatically).**
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+***Also, it's possible to add several questions with the following types:***
+1. up to 4 single-line strings,
+2. up to 4 multiple-line texts,
+3. up to 4 non-negative integers,
+4. up to 4 checkboxes.
 
-## Support
+**Each question has a title, description, and a boolean value that defines whether the question will be displayed in the table of the filled-out forms (on the tab of the template).**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**It's possible to reorder questions with drag'n'drop.**
 
-## Stay in touch
+For example, I want to create a questionnaire for job candidates. I add the following questions:
+Single-line question "Position" ("What position do you apply for?"),
+Integer-value question "Experience" ("Work on the commercial projects or freelance (in years)"),
+Single-line question "Contact" ("Phone number or Skype"),
+Text question "Additional information"/("Write anything in the field below").
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+***Main page of the app contains:***
+1. gallery of latest templates (name, description or image, author),
+2. table of the top 5 most popular templates (with the largest number of filled forms);
+3. tag cloud (when the user clicks on the tag, you display the list of templates—in general, you should use “search results page” for it).
 
-## License
+**When the template is opened (by the author or another user that has access), there is a comments list at the bottom. Comments are linear, added only to the end (it’s impossible to insert a new comment between old ones, only add to the end). Comments have to be updated automatically—when the template page is opened and somebody adds a comment to it, it should be added automagically (it’s possible to have a 2-5 second delay).**
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+**Every template also has "likes" (no more than one from one user per given template).**
+
+**The application should support two languages: English and any other—Polish, Spanish, Uzbek, Georgian, etc. (the user selects one and the choice is saved). Only UI is translated, not the user templates or filled out forms.**
+
+**The application should support two visual themes (skins): light and dark (the user selects one and the choice is saved).**
+
+It’s required:
+1. to use CSS framework, e.g., Bootstrap (but you can use any CSS other framework and any set of control),
+2. **to support different screen resolutions (including mobile phones), be adaptive,**
+3. to use ORM to access data (sequelize, prism, typeorm, EF—anything you like),
+4. **to use a full-text search engine (either an external library or using native database features).**
+
+***DON'T:***
+1. don't use a full database scan with SELECTs,
+2. don't upload images to your Web server,
+3. don't perform database queries in the loop.
+
+Is it possible to use the X library? Yes, yes to all, remember my choice.
+
+***Optional requirements (for a separate grade, only if all other requirements are implemented):***
+1. authentication via social networks,
+2. add questions with the type “one from the given list” with the ability to specify a list of available options (e.g., template auther create a "Position" question  with options "Developer"/"DevOps"/"Tester"),
+3. add any number of questions of any type (not 0 or 1 or 2 or 3 or 4, but any number of them),
+4. add the "E-mail me the copy of my answers" checkbox to the form.
+
+***IMPORTANT NOTE. Do not copy any code from code heaps. IT’S MUCH BETTER TO DO LESS, BUT UNDERSTAND COMPLETELY WHAT YOU WRITE EXACTLY. I’m dead serious—we will ask you to modify your code on the fly, add something or change something, will ask you questions, and will check your ability to work with your project code. It’s more important than the number of implemented requirements. Your supervisor saw a lot of similar projects and knows probably most of the available stuff on this topic on the Internet. Do not copy. Use libraries as much as possible. But don’t copy***
+
+***You have to use ready components, libraries, and controls. E.g., use a ready-to-use control to render markdown or a ready-to-use control to upload images with drag'n'drop or a ready-to-use control to enter tags or a ready-to-use control to render tag cloud, etc. The less custom code your app contains, the better.***
+
+***AND THE MOST IMPORTANT: Start your work from the deployment of the static "Hello, world" page and have a deployable version all the time.***
+
+AND EVEN MORE IMPORTANT: Defend your project even if you've done a small part of it.
