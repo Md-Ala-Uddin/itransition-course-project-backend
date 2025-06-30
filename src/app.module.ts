@@ -5,9 +5,10 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TemplatesModule } from './templates/templates.module';
 import { FormsModule } from './forms/forms.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule],
+  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule],
   controllers: [AppController],
   providers: [AppService],
 })
