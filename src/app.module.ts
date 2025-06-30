@@ -6,9 +6,10 @@ import { UsersModule } from './users/users.module';
 import { TemplatesModule } from './templates/templates.module';
 import { FormsModule } from './forms/forms.module';
 import { CommentsModule } from './comments/comments.module';
+import { LikesModule } from './likes/likes.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule],
+  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule],
   controllers: [AppController],
   providers: [AppService],
 })
