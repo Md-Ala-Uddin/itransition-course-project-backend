@@ -13,9 +13,25 @@ import { FilesModule } from './files/files.module';
 import { SearchService } from './search/search.service';
 import { AdminModule } from './admin/admin.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { ConfigModule } from '@nestjs/config';
+import config from './config/app.config';
 
 @Module({
-  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule, TagsModule, TopicsModule, FilesModule, AdminModule, PrismaModule],
+  imports: [
+    AuthModule,
+    UsersModule,
+    TemplatesModule,
+    FormsModule,
+    CommentsModule,
+    LikesModule,
+    TagsModule,
+    TopicsModule,
+    FilesModule,
+    AdminModule,
+    PrismaModule,
+    ConfigModule.forRoot({ isGlobal: true, load: [config] }),
+    PrismaModule,
+  ],
   controllers: [AppController],
   providers: [AppService, SearchService],
 })
