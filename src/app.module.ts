@@ -7,9 +7,10 @@ import { TemplatesModule } from './templates/templates.module';
 import { FormsModule } from './forms/forms.module';
 import { CommentsModule } from './comments/comments.module';
 import { LikesModule } from './likes/likes.module';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule],
+  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule, TagsModule],
   controllers: [AppController],
   providers: [AppService],
 })
