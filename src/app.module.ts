@@ -12,9 +12,10 @@ import { TopicsModule } from './topics/topics.module';
 import { FilesModule } from './files/files.module';
 import { SearchService } from './search/search.service';
 import { AdminModule } from './admin/admin.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule, TagsModule, TopicsModule, FilesModule, AdminModule],
+  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule, TagsModule, TopicsModule, FilesModule, AdminModule, PrismaModule],
   controllers: [AppController],
   providers: [AppService, SearchService],
 })
