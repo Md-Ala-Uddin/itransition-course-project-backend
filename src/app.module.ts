@@ -10,10 +10,11 @@ import { LikesModule } from './likes/likes.module';
 import { TagsModule } from './tags/tags.module';
 import { TopicsModule } from './topics/topics.module';
 import { FilesModule } from './files/files.module';
+import { SearchService } from './search/search.service';
 
 @Module({
   imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule, TagsModule, TopicsModule, FilesModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SearchService],
 })
 export class AppModule {}
