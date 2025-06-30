@@ -11,9 +11,10 @@ import { TagsModule } from './tags/tags.module';
 import { TopicsModule } from './topics/topics.module';
 import { FilesModule } from './files/files.module';
 import { SearchService } from './search/search.service';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule, TagsModule, TopicsModule, FilesModule],
+  imports: [AuthModule, UsersModule, TemplatesModule, FormsModule, CommentsModule, LikesModule, TagsModule, TopicsModule, FilesModule, AdminModule],
   controllers: [AppController],
   providers: [AppService, SearchService],
 })
