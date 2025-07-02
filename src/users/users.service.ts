@@ -4,12 +4,16 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
+  private users = [
+    { id: 1, name: 'Alice', email: 'alice@mail.com' },
+    { id: 2, name: 'Bob', email: 'bob@mail.com' },
+  ];
   create(createUserDto: CreateUserDto) {
     return 'This action adds a new user';
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.users;
   }
 
   findOne(id: number) {
