@@ -1,30 +1,83 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma, User } from '@prisma/client';
+import { PublicUser } from './interfaces/public-user.interface';
 
 @Injectable()
 export class UsersService {
-  private users = [
-    { id: 1, name: 'Alice', email: 'alice@mail.com' },
-    { id: 2, name: 'Bob', email: 'bob@mail.com' },
-  ];
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private readonly prismaService: PrismaService) {}
+
+  async create(user: Prisma.UserCreateInput): Promise<PublicUser> {
+    return await this.prismaService.user.create({
+      data: user,
+    });
   }
 
-  findAll() {
-    return this.users;
+  async findAll(params: {
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.UserWhereUniqueInput;
+    where?: Prisma.UserWhereInput;
+    orderBy?: Prisma.UserOrderByWithRelationInput;
+  }): Promise<PublicUser[]> {
+    const { skip, take, cursor, where, orderBy } = params;
+    return await this.prismaService.user.findMany({
+      skip,
+      take,
+      cursor,
+      where,
+      orderBy,
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        blocked: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+  ): Promise<User | null> {
+    return await this.prismaService.user.findUnique({
+      where: userWhereUniqueInput,
+    });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(
+    where: Prisma.UserWhereUniqueInput,
+    data: Prisma.UserUpdateInput,
+  ): Promise<PublicUser> {
+    return await this.prismaService.user.update({
+      where,
+      data,
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        blocked: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(where: Prisma.UserWhereUniqueInput): Promise<PublicUser> {
+    return await this.prismaService.user.delete({
+      where,
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        blocked: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
   }
 }
