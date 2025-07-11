@@ -16,15 +16,17 @@ datasource db {
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
-  password  String
+  passwordHash  String
   name      String
   role      Role     @default(USER)
   blocked   Boolean  @default(false)
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Role {
-  USER
-  AUTHOR
   ADMIN
+  CREATOR // those who create template QUESTIONS
+  AUTHOR // those who answers template questions
+  USER // regular users
 }
