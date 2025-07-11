@@ -12,14 +12,13 @@ export class CreateUserDto {
   email: string;
 
   @IsString()
-  // ✨ Use IsStrongPassword decorator
   @IsStrongPassword(
     {
-      minLength: 8, // Minimum length of the password
-      minLowercase: 1, // Minimum number of lowercase letters
-      minUppercase: 1, // Minimum number of uppercase letters
-      minNumbers: 1, // Minimum number of numbers
-      minSymbols: 1, // Minimum number of symbols (e.g., !, @, #, $)
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
     },
     {
       message:
